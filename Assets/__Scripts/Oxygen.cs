@@ -73,4 +73,14 @@ public class Oxygen : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Restores oxygen by a given amount.
+    /// </summary>
+    /// <param name="regain">Amount of oxygen to regain.</param>
+    public void RegainOxygen(float regain)
+    {
+        OXYGEN_LEVEL = (OXYGEN_LEVEL + regain >= startingOxygen) ? startingOxygen : OXYGEN_LEVEL + regain;
+    }
+
+
 }
