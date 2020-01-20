@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DiveController))]
 public class PlayerInput : MonoBehaviour
 {
     
+    DiveController diveController;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        diveController = GetComponent<DiveController>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        if (Input.GetButtonDown("DiveLeft"))
+        {
+            diveController.DiveLeft();
+        } 
+        else if (Input.GetButtonDown("DiveRight"))
+        {
+            diveController.DiveRight();   
+        }
     }
 
 }
