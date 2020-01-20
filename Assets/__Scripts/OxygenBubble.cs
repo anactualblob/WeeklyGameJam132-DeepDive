@@ -14,7 +14,16 @@ public class OxygenBubble : MonoBehaviour
     
     void Update()
     {
+
         FloatUp();
+
+        // destroy object if it leaves the camera viewport
+        if ( transform.position.y  >  Camera.main.transform.position.y+Camera.main.orthographicSize )
+        { 
+            Destroy(gameObject, 1f);
+        }
+
+
     }
 
 
@@ -25,6 +34,9 @@ public class OxygenBubble : MonoBehaviour
     {
         transform.Translate (Vector3.up * floatUpSpeed * Time.deltaTime);
     }
+
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {

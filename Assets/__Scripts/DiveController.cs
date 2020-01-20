@@ -11,7 +11,6 @@ public class DiveController : MonoBehaviour
     [SerializeField] float maxVelocityDown = 1;
     [SerializeField] float maxVelocitySide = 1;
 
-    [Space]
     [Header("Debug")]
     public Vector2 velocity;
     public Vector2 acceleration;
@@ -49,17 +48,12 @@ public class DiveController : MonoBehaviour
             velocity = Vector2.zero;
         }
 
-
-
-
         
-
+        // resolve position, velocity and aceleration
         velocity += acceleration;
-
         transform.Translate( velocity );
-
-
         acceleration = Vector2.zero;
+        
     }
 
 

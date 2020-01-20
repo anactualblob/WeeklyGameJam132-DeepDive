@@ -134,4 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oxygenRegain: 30
-  floatUpSpeed: 1
+  floatUpSpeed: 1.5

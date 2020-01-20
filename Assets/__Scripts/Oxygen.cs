@@ -33,7 +33,6 @@ public class Oxygen : MonoBehaviour
     [Tooltip("How Much oxygen the player loses when diving")]
     [SerializeField] float diveOxygenCost;
 
-    [Space]
     [Header("Debug")]
     public float oxygenLevel;
     public static float OXYGEN_LEVEL
