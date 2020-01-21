@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleSpawner : MonoBehaviour
+public class OxygenBubbleSpawner : MonoBehaviour
 {
 
     public GameObject bubblePrefab;
     [Space]
     [Tooltip("Limit of bubble spawn position, in units away from x = 0")]
     [SerializeField] float horizontalSpawnBound;
-    [Tooltip("Senconds between bubble spawn")]
+    [Tooltip("Seconds between bubble spawn")]
     [SerializeField] float spawnDelay;
     [SerializeField] float delayBeforeFirstSpawn;
 
     float countdown = 0;
+
 
 
     void Update()

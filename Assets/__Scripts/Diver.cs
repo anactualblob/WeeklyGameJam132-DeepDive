@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class Diver : MonoBehaviour
 {
-    
 
+    static Diver _S;
+    static Diver S
+    {
+        get
+        {
+            if (_S != null) return _S;
+            Debug.LogError("Diver.cs : trying to get Diver Sigleton instance but it has not been assigned.");
+            return null;
+        }
+        set
+        {
+            if (_S != null)
+            {
+                Debug.LogError("Diver.cs : trying to set Diver Sigleton instance again.");
+                return;
+            }
+            _S = value;
+        }
+    }
 
     [SerializeField] float diveAngle = 45;
     [SerializeField] float diveForce = 1;
@@ -25,7 +43,16 @@ public class Diver : MonoBehaviour
     [Space]
     public float depth = 0;
 
-   
+    static public float DEPTH
+    {
+        get { return S.depth; }
+        private set { S.depth = value; }
+    }
+
+    private void Awake()
+    {
+        S = this;
+    }
 
     void Start()
     {
