@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Diver : MonoBehaviour
 {
+    
+
 
     [SerializeField] float diveAngle = 45;
     [SerializeField] float diveForce = 1;
@@ -11,14 +13,28 @@ public class Diver : MonoBehaviour
     [SerializeField] float maxVelocityDown = 1;
     [SerializeField] float maxVelocitySide = 1;
 
+    [Header("Depth")]
+    [SerializeField] DepthMeter depthMeter;
+    [Tooltip("How many meters in a unit. Used for depth calculation.")]
+    [SerializeField] float metersPerUnit;
+    [SerializeField] float maxDepth;
+
     [Header("Debug")]
     public Vector2 velocity;
     public Vector2 acceleration;
+    [Space]
+    public float depth = 0;
+
+   
 
     void Start()
     {
         velocity = Vector2.zero;
         acceleration = Vector2.zero;
+
+        //setup depth meter
+        depthMeter.maxDepth = maxDepth;
+        depthMeter.depth = depth;
     }
 
     
@@ -53,7 +69,11 @@ public class Diver : MonoBehaviour
         velocity += acceleration;
         transform.Translate( velocity );
         acceleration = Vector2.zero;
-        
+
+
+        // update depth & depth meter
+        depth = transform.position.y * metersPerUnit;
+        depthMeter.depth = depth;
     }
 
 

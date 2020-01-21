@@ -23,10 +23,8 @@ public class OxygenGauge : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(startWidth * (gaugeLevel / gaugeMax));
-
-        //gaugeMask.rect.Set(gaugeMask.rect.x, gaugeMask.rect.y, startWidth * (gaugeLevel / gaugeMax), gaugeMask.rect.height);
-
+        // set size to a percentage of startWidth determined by the current and maximum oxygen levels
+        // since all 4 anchors are at the same position, sizeDelta is the same as size
         gaugeMask.sizeDelta = new Vector2(startWidth * (gaugeLevel / gaugeMax), gaugeMask.sizeDelta.y);
     }
 

@@ -44,7 +44,7 @@ public class Oxygen : MonoBehaviour
     public static float OXYGEN_LEVEL
     {
         get { return S.oxygenLevel; }
-        set 
+        private set 
         {
             S.oxygenLevel = (value <= 0) ? 0 : value;
         }
