@@ -131,4 +131,31 @@ public class Diver : MonoBehaviour
         //spend oxygen
         Oxygen.SpendOxygenDive();
     }
+
+
+    /// <summary>
+    /// Stops all momentum and makes the player move up and towards the horizontal center of the screen.
+    /// <para>
+    /// Called when player collides with an enemy.
+    /// </para>
+    /// </summary>
+    public void EscapeEnemy()
+    {
+        Debug.Log("Escaping Enemy");
+
+        // stop momentum
+        velocity = Vector2.zero;
+        acceleration = Vector2.zero;
+
+        // go up and towards x=0
+        // this calculation ensures that we will rotate clockwise if we're on the left of the screen and counter-clockwise if we're on the right
+        float angle = -diveAngle * Mathf.Sign(transform.position.x);
+        acceleration = Quaternion.AngleAxis( angle, Vector3.back )  *  Vector2.up * diveForce * Time.deltaTime;
+        Debug.Log(acceleration);
+
+        // consume oxygen
+        Oxygen.SpendOxygenEscape();
+
+
+    }
 }

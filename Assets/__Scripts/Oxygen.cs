@@ -38,6 +38,9 @@ public class Oxygen : MonoBehaviour
     [SerializeField] float constantOxygenCost;
     [Tooltip("How Much oxygen the player loses when diving")]
     [SerializeField] float diveOxygenCost;
+    [Tooltip("How much oxygen the player loses when escaping an enemy")]
+    [SerializeField] float escapeOxygenCost;
+
 
     [Header("Debug")]
     public float oxygenLevel;
@@ -80,14 +83,25 @@ public class Oxygen : MonoBehaviour
 
 
     /// <summary>
-    /// Substracts Oxygen.diveOxygenCost from Oxygen.OXYGEN_LEVEL.
+    /// Substracts diveOxygenCost from OXYGEN_LEVEL.
     /// <para>
-    /// Call this when diving.
+    /// Called when diving.
     /// </para>
     /// </summary>
     static public void SpendOxygenDive()
     {
         OXYGEN_LEVEL -= S.diveOxygenCost;
+    }
+
+    /// <summary>
+    /// Substracts escapeOxygenCost from OXYGEN_LEVEL.
+    /// <para>
+    /// Called when escaping from an enemy.
+    /// </para>
+    /// </summary>
+    static public void SpendOxygenEscape()
+    {
+        OXYGEN_LEVEL -= S.escapeOxygenCost;
     }
 
 

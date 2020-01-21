@@ -929,8 +929,8 @@ MonoBehaviour:
   spawnableEnemiesUpdateInterval: 10
   spawnDelay: 1
   secondsBeforeFirstSpawn: 5
-  depthInteger: 0
-  previousDepthInteger: 0
+  verticalSpawnOffset: -3
+  horizontalSpawnMargin: 0.3
 --- !u!4 &1330886102
 Transform:
   m_ObjectHideFlags: 0

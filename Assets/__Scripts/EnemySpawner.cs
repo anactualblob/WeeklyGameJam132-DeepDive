@@ -11,14 +11,22 @@ public class EnemySpawner : MonoBehaviour
     [Space]
     [SerializeField] float spawnDelay;
     [SerializeField] float secondsBeforeFirstSpawn;
+    [SerializeField] int maxEnemiesInScene;
+    [Space]
+    [Tooltip("Vertical offset from the camera center where enemies spawn.")]
+    [SerializeField] float verticalSpawnOffset = 0;
+    [Tooltip("How far horizontally from the edge of the camera should enemies spawn.")]
+    [SerializeField] float horizontalSpawnMargin = 0;
 
     float countdown = 0;
 
 
-    [Header("Debug")]
-    public int depthInteger = 0;
-    public int previousDepthInteger = 0;
+   
+    int depthInteger = 0;
+    int previousDepthInteger = 0;
 
+
+    List<GameObject> enemiesInScene = new List<GameObject>();
 
 
     private void Start()
@@ -90,20 +98,32 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     public void InstantiateEnemy()
     {
-        // TODO : spawn at camera y position and either to the left or to the right
         Vector2 spawnPos = new Vector2();
 
-        spawnPos.y = Camera.main.transform.position.y;
+        // spawn the enemy at a vertical offset from the height of the camera
+        spawnPos.y = Camera.main.transform.position.y + verticalSpawnOffset;
+        
+        // this finds half the width of the camera viewport
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float camHalfHeight = Camera.main.orthographicSize;
+        float camHalfWidth = screenAspect * camHalfHeight;
+
+        // the x position where the enemy spawns is outside the camera viewport either on the right or left.
+        spawnPos.x = Mathf.Sign(Random.Range(-1.0f, 1.0f)) * (horizontalSpawnMargin + camHalfWidth);
+
 
         // get a random enemy prefab from the list of spawnable enemies;
         GameObject enemy = enemyListSO.GetRandomSpawnableEnemy();
 
+
+        // instantiate if GetRandomSpawnableEnemy returned a valid enemy prefab
         if (enemy != null)
         {
             GameObject instEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
 
             // sets this game object as parent
             instEnemy.transform.SetParent(this.transform);
+
         }
         else
         {
