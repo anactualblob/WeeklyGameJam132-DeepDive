@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Oxygen : MonoBehaviour
 {
@@ -24,6 +25,11 @@ public class Oxygen : MonoBehaviour
             _S = value;
         }
     }
+
+
+    [Header("UI")]
+    [SerializeField] GameObject oxygenGaugePanel;
+    OxygenGauge oxygenGauge;
 
     [Header("Oxygen Values")]
     [Tooltip("Quantity of oxygen the player starts with")]
@@ -49,6 +55,16 @@ public class Oxygen : MonoBehaviour
     {
         _S = this;
         OXYGEN_LEVEL = startingOxygen;
+
+        oxygenGauge = oxygenGaugePanel.GetComponent<OxygenGauge>();
+        if (oxygenGauge == null)
+        {
+            Debug.LogError("Oxygen.cs : OxygenGauge.cs component not found on oxygenGaugePanel GameObject.");
+        } else
+        {
+            oxygenGauge.gaugeLevel = OXYGEN_LEVEL;
+            oxygenGauge.gaugeMax = startingOxygen;
+        }
     }
 
 
@@ -57,6 +73,9 @@ public class Oxygen : MonoBehaviour
     {
         // oxygen level drops at a rate of constantOxygenCost/second
         OXYGEN_LEVEL -= constantOxygenCost * Time.deltaTime;
+
+        // update oxygen gauge every frame
+        oxygenGauge.gaugeLevel = OXYGEN_LEVEL;
     }
 
 
@@ -73,7 +92,7 @@ public class Oxygen : MonoBehaviour
 
 
     /// <summary>
-    /// Restores oxygen by a given amount.
+    /// Restores oxygen by a given amount without going above startingOxygen.
     /// </summary>
     /// <param name="regain">Amount of oxygen to regain.</param>
     public void RegainOxygen(float regain)

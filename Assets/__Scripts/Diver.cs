@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiveController : MonoBehaviour
+public class Diver : MonoBehaviour
 {
 
     [SerializeField] float diveAngle = 45;

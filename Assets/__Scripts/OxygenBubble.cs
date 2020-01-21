@@ -7,6 +7,7 @@ using UnityEngine;
 public class OxygenBubble : MonoBehaviour
 {
 
+    //TODO : make random
     public float oxygenRegain = 30;
     [Space]
     [SerializeField] float floatUpSpeed = 1;

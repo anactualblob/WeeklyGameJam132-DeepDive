@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DiveController))]
+[RequireComponent(typeof(Diver))]
 public class PlayerInput : MonoBehaviour
 {
     
-    DiveController diveController;
+    Diver diver;
 
     void Awake()
     {
-        diveController = GetComponent<DiveController>();
+        diver = GetComponent<Diver>();
     }
 
     
@@ -18,11 +18,11 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetButtonDown("DiveLeft"))
         {
-            diveController.DiveLeft();
+            diver.DiveLeft();
         } 
         else if (Input.GetButtonDown("DiveRight"))
         {
-            diveController.DiveRight();   
+            diver.DiveRight();   
         }
     }
 

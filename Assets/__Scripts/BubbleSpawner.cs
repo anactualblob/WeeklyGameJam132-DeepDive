@@ -45,6 +45,7 @@ public class BubbleSpawner : MonoBehaviour
     /// </summary>
     void SpawnBubble()
     {
+        // TODO : skew the odds for more even distribution
         float randomX = Random.Range(-horizontalSpawnBound, horizontalSpawnBound);
         
         float y = Camera.main.transform.position.y - Camera.main.orthographicSize - 0.2f;
