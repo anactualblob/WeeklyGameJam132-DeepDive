@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] float speed;
+    [SerializeField] float randomAngleRange;
 
     Vector2 direction;
 
@@ -16,12 +17,19 @@ public class Enemy : MonoBehaviour
         direction.y = 0;
         direction = direction.normalized;
 
+        // orienting direction by a random angle between randomAngleRange and -randomAngleRange
+        direction = Quaternion.AngleAxis(Random.Range(-randomAngleRange, randomAngleRange), Vector3.back) * direction;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
+
+
+        
+        
     }
 
 

@@ -50,10 +50,14 @@ public class Diver : MonoBehaviour
         private set { S.depth = value; }
     }
 
-
-
     SpriteRenderer spriteRenderer;
     Animator animator;
+    
+    //[Header("Particle Systems")]
+    //[SerializeField] ParticleSystem diveParticles;
+
+
+
 
     private void Awake()
     {
@@ -131,6 +135,9 @@ public class Diver : MonoBehaviour
 
         //spend oxygen
         Oxygen.SpendOxygenDive();
+
+        //// start diveParticles
+        //diveParticles.Play();
     }
 
     /// <summary>
@@ -151,6 +158,9 @@ public class Diver : MonoBehaviour
 
         //spend oxygen
         Oxygen.SpendOxygenDive();
+
+        //// start diveParticles
+        //diveParticles.Play();
     }
 
 

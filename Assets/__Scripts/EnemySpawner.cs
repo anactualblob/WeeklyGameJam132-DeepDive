@@ -13,8 +13,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float secondsBeforeFirstSpawn;
     [SerializeField] int maxEnemiesInScene;
     [Space]
-    [Tooltip("Vertical offset from the camera center where enemies spawn.")]
-    [SerializeField] float verticalSpawnOffset = 0;
+    [Tooltip("Minimum vertical offset from the camera center where enemies spawn.")]
+    [SerializeField] float minVerticalSpawnOffset = 0;
+    [Tooltip("Maximum vertical offset from the camera center where enemies spawn.")]
+    [SerializeField] float maxVerticlaSpawnOffset = 0;
     [Tooltip("How far horizontally from the edge of the camera should enemies spawn.")]
     [SerializeField] float horizontalSpawnMargin = 0;
 
@@ -101,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPos = new Vector2();
 
         // spawn the enemy at a vertical offset from the height of the camera
-        spawnPos.y = Camera.main.transform.position.y + verticalSpawnOffset;
+        spawnPos.y = Camera.main.transform.position.y + Random.Range(minVerticalSpawnOffset, maxVerticlaSpawnOffset);
         
         // this finds half the width of the camera viewport
         float screenAspect = (float)Screen.width / (float)Screen.height;
