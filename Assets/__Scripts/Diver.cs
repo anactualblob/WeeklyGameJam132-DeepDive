@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
 public class Diver : MonoBehaviour
 {
 
@@ -49,9 +50,17 @@ public class Diver : MonoBehaviour
         private set { S.depth = value; }
     }
 
+
+
+    SpriteRenderer spriteRenderer;
+    Animator animator;
+
     private void Awake()
     {
         S = this;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -114,6 +123,12 @@ public class Diver : MonoBehaviour
     {
         acceleration += (Vector2)(Quaternion.AngleAxis(diveAngle, Vector3.back) * Vector2.down * diveForce * Time.deltaTime);
 
+        // make sprite face left
+        spriteRenderer.flipX = false;
+
+        // start diving animation
+        animator.SetTrigger("Diving");
+
         //spend oxygen
         Oxygen.SpendOxygenDive();
     }
@@ -128,6 +143,12 @@ public class Diver : MonoBehaviour
     {
         acceleration += (Vector2)(Quaternion.AngleAxis(-diveAngle, Vector3.back) * Vector2.down * diveForce * Time.deltaTime);
 
+        // make sprite face right
+        spriteRenderer.flipX = true;
+
+        // start diving animation
+        animator.SetTrigger("Diving");
+
         //spend oxygen
         Oxygen.SpendOxygenDive();
     }
@@ -141,7 +162,6 @@ public class Diver : MonoBehaviour
     /// </summary>
     public void EscapeEnemy()
     {
-        Debug.Log("Escaping Enemy");
 
         // stop momentum
         velocity = Vector2.zero;
@@ -149,9 +169,16 @@ public class Diver : MonoBehaviour
 
         // go up and towards x=0
         // this calculation ensures that we will rotate clockwise if we're on the left of the screen and counter-clockwise if we're on the right
-        float angle = -diveAngle * Mathf.Sign(transform.position.x);
+        // dividing diveAngle by 2 to go more up than to the side
+        float angle = -diveAngle/2 * Mathf.Sign(transform.position.x);
         acceleration = Quaternion.AngleAxis( angle, Vector3.back )  *  Vector2.up * diveForce * Time.deltaTime;
-        Debug.Log(acceleration);
+
+        // determine flipped
+        // flip if the player is to the left ( sprite faces left by default and must face the center of the screen)
+        spriteRenderer.flipX = Mathf.Sign(transform.position.x) < 0;
+
+        //Start animation
+        animator.SetTrigger("Escaping");
 
         // consume oxygen
         Oxygen.SpendOxygenEscape();
