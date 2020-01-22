@@ -58,10 +58,9 @@ public class TiledParallaxTexture : MonoBehaviour
 
             Vector3 pos = new Vector3(transform.position.x, transform.position.y - height, transform.position.z);
 
-            Debug.Log(pos);
-
             Instantiate(gameObject, pos , Quaternion.identity);
 
+            // the object has spawned the next object so it won't spawn any more
             hasSpawnedNext = true;
         }
 

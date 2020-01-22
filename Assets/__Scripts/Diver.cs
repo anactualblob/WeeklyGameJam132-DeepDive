@@ -52,12 +52,13 @@ public class Diver : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     Animator animator;
-    
+
     //[Header("Particle Systems")]
     //[SerializeField] ParticleSystem diveParticles;
 
 
-
+    float leftBound;
+    float rightBound;
 
     private void Awake()
     {
@@ -75,6 +76,15 @@ public class Diver : MonoBehaviour
         //setup depth meter
         depthMeter.maxDepth = maxDepth;
         depthMeter.depth = depth;
+
+        // find the edges of the screen
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+        float halfHeight = Camera.main.orthographicSize;
+        float halfWidth = screenAspect * halfHeight;
+
+        // leftbound and rightbound are the left and right borders of the camera
+        leftBound = -halfWidth;
+        rightBound = halfWidth;
     }
 
     
@@ -105,8 +115,20 @@ public class Diver : MonoBehaviour
         }
 
         
-        // resolve position, velocity and aceleration
+        // update velocity with acceleration
         velocity += acceleration;
+
+        // if the diver would go out of the screen with this velocity, reduce it
+        if ( (transform.position + (Vector3)velocity).x > rightBound)
+        {
+            velocity.x = 0;
+        } 
+        else if ( (transform.position + (Vector3)velocity).x < leftBound)
+        {
+            velocity.x = 0;
+        }
+
+        // resolve position and reset acceleration;
         transform.Translate( velocity );
         acceleration = Vector2.zero;
 
