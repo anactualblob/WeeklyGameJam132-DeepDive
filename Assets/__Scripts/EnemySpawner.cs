@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
    
     int depthInteger = 0;
-    int previousDepthInteger = 0;
+    int previousDepthInteger = -1;
 
 
     List<GameObject> enemiesInScene = new List<GameObject>();
