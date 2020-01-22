@@ -145,3 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   randomAngleRange: 45
+  enemyLifetime: 20

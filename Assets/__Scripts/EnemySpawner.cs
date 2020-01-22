@@ -28,12 +28,9 @@ public class EnemySpawner : MonoBehaviour
     int previousDepthInteger = -1;
 
 
-    List<GameObject> enemiesInScene = new List<GameObject>();
-
 
     private void Start()
     {
-        Debug.Log("Start");
         UpdateSpawnableEnemies();
     }
 
@@ -58,24 +55,23 @@ public class EnemySpawner : MonoBehaviour
 
         // Spawning enemies :
         // wait until the secondsBeforFirstSpawn is passed
-        if (Time.realtimeSinceStartup < secondsBeforeFirstSpawn)
+        if (Time.realtimeSinceStartup >= secondsBeforeFirstSpawn)
         {
-            return;
+            // countdown every frame
+            countdown -= Time.deltaTime;
+
+            // if the countdown reaches 0 (and there are not too many enemies), spawn an enemy and reset countdown
+            if (countdown <= 0 && transform.childCount < maxEnemiesInScene)
+            {
+                InstantiateEnemy();
+                countdown = spawnDelay;
+            }
         }
             
 
 
 
-        // countdown every frame
-        countdown -= Time.deltaTime;
-
-        // if the countdown reaches 0, spawn an enemy and reset countdown
-        if (countdown <= 0)
-        {
-            Debug.Log("SpawningEnemy");
-            InstantiateEnemy();
-            countdown = spawnDelay;
-        }
+        
         
 
     }
