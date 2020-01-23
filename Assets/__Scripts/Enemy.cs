@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
 
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour
     float rightBound;
 
     float topBound;
+
+    SpriteRenderer spriteRenderer;
 
 
     private void Start()
@@ -41,6 +44,11 @@ public class Enemy : MonoBehaviour
         // leftbound and rightbound are the left and right borders of the camera (plus a little margin)
         leftBound = -halfWidth - 0.3f;
         rightBound = halfWidth + 0.3f;
+
+
+
+        //get sprite renderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -71,6 +79,13 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
+
+
+        // determine if the sprite should be mirrored
+        // enemy sprites face left by default
+        spriteRenderer.flipX = Mathf.Sign(direction.y) > 0 ? true : false;
         
     }
 

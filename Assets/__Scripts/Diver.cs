@@ -37,12 +37,13 @@ public class Diver : MonoBehaviour
     [Tooltip("How many meters in a unit. Used for depth calculation.")]
     [SerializeField] float metersPerUnit;
     [SerializeField] float maxDepth;
-
-    [Header("Debug")]
-    public Vector2 velocity;
-    public Vector2 acceleration;
     [Space]
-    public float depth = 0;
+    [SerializeField] GameObject groundPrefab;
+    
+    Vector2 velocity;
+    Vector2 acceleration;
+    
+    float depth = 0;
 
     static public float DEPTH
     {
@@ -89,11 +90,27 @@ public class Diver : MonoBehaviour
         // leftbound and rightbound are the left and right borders of the camera
         leftBound = -halfWidth;
         rightBound = halfWidth;
+
+
+        // spawn ground at max depth
+        Instantiate(groundPrefab, Vector3.up * (-3.5f + (maxDepth / metersPerUnit)), Quaternion.identity);
     }
 
     
     void Update()
     {
+        if (StateManager.STATE != StateManager.State.inGame)
+        {
+            return;
+        }
+
+
+        if (DEPTH <= maxDepth)
+        {
+            StateManager.GameWon();
+        }
+
+
         // clamp vertical velocity
         if (Mathf.Abs(velocity.y) > maxVelocityDown)
         {

@@ -13,15 +13,35 @@ MonoBehaviour:
   m_Name: EnemiesListScriptableObject
   m_EditorClassIdentifier: 
   enemyInfoList:
-  - name: Enemy1
+  - name: sunfish
     minDepth: 0
-    maxDepth: -100
+    maxDepth: -2000
     prefab: {fileID: 153277388958503804, guid: c97a37c038963f94cac1c44fd95cdd26, type: 3}
-  - name: Enemy2
-    minDepth: -100
-    maxDepth: -500
+  - name: salmon
+    minDepth: -1000
+    maxDepth: -3000
     prefab: {fileID: 153277388958503804, guid: eb444669f8fada34ea5484a01aa46b83, type: 3}
-  - name: Enemy3
-    minDepth: -500
-    maxDepth: -1000
+  - name: dolphin
+    minDepth: -2000
+    maxDepth: -4000
     prefab: {fileID: 153277388958503804, guid: e68343c60a1ea094fbfb79fb152e4732, type: 3}
+  - name: swordfish
+    minDepth: -3000
+    maxDepth: -5000
+    prefab: {fileID: 153277388958503804, guid: d4ca0f5ad38c0c2428233e4a7babd7cf, type: 3}
+  - name: black gulper
+    minDepth: -4000
+    maxDepth: -6000
+    prefab: {fileID: 153277388958503804, guid: ede95a5df13698548a0f556b6add4e63, type: 3}
+  - name: shark
+    minDepth: -5000
+    maxDepth: -7000
+    prefab: {fileID: 153277388958503804, guid: 3d656e95321d1f64d8534878be0b304b, type: 3}
+  - name: lampfish
+    minDepth: -6000
+    maxDepth: -8000
+    prefab: {fileID: 153277388958503804, guid: c69a97592988ee14b91a3c5a838932e2, type: 3}
+  - name: giant squid
+    minDepth: -7000
+    maxDepth: -9000
+    prefab: {fileID: 153277388958503804, guid: 42f597ae413e84841aa231cf3ed66096, type: 3}

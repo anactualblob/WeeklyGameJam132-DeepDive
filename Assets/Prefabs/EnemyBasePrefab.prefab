@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8451982141916074915}
   - component: {fileID: 529821368404666992}
   - component: {fileID: 1479935399040960286}
+  - component: {fileID: 3195460713450558755}
   m_Layer: 0
   m_Name: EnemyBasePrefab
   m_TagString: Enemy
@@ -146,3 +147,22 @@ MonoBehaviour:
   speed: 1
   randomAngleRange: 45
   enemyLifetime: 20
+--- !u!95 &3195460713450558755
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467335667061450085}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

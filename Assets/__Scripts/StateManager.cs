@@ -97,9 +97,8 @@ public class StateManager : MonoBehaviour
 
 
     public GameObject gameOverPanel;
+    public GameObject gameWonPanel;
 
-    public PlayableAsset introPlayable;
-    public TimelineAsset introTimeline;
 
 
     
@@ -109,15 +108,15 @@ public class StateManager : MonoBehaviour
         S = this;
 
         STATE = State.menu;
-    }
 
+        Time.timeScale = 1;
+    }
 
 
 
     static public void StartGame()
     {
         STATE = State.inGame;
-        Time.timeScale = 1;
     }
 
 
@@ -132,6 +131,15 @@ public class StateManager : MonoBehaviour
     }
 
 
+    static public void GameWon()
+    {
+        STATE = State.gameWon;
+        S.gameWonPanel.SetActive(true);
+
+        Time.timeScale = 0;
+    }
+
+
 
 
 
@@ -139,11 +147,6 @@ public class StateManager : MonoBehaviour
     {
         STATE = State.intro;
         PlayableDirector director = Camera.main.GetComponent<PlayableDirector>();
-
-        PlayableAsset playable = director.playableAsset;
-
-        director.playableAsset = null;
-        director.playableAsset = introTimeline;
 
         director.Stop();
         director.Play();
