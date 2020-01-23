@@ -16,6 +16,8 @@ public class PlayerInput : MonoBehaviour
     
     void Update()
     {
+        if (StateManager.STATE != StateManager.State.inGame) return;
+
         if (Input.GetButtonDown("DiveLeft"))
         {
             diver.DiveLeft();

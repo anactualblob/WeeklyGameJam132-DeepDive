@@ -56,7 +56,7 @@ public class Oxygen : MonoBehaviour
 
     void Awake()
     {
-        _S = this;
+        S = this;
         OXYGEN_LEVEL = startingOxygen;
 
         oxygenGauge = oxygenGaugePanel.GetComponent<OxygenGauge>();
@@ -79,6 +79,11 @@ public class Oxygen : MonoBehaviour
 
         // update oxygen gauge every frame
         oxygenGauge.gaugeLevel = OXYGEN_LEVEL;
+
+        if (OXYGEN_LEVEL <= 0)
+        {
+            StateManager.GameOver();
+        }
     }
 
 

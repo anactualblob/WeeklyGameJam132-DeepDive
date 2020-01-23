@@ -70,6 +70,10 @@ public class Diver : MonoBehaviour
 
     void Start()
     {
+
+        StateManager.StartGame();
+
+
         velocity = Vector2.zero;
         acceleration = Vector2.zero;
 

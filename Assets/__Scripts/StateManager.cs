@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 public class StateManager : MonoBehaviour
 {
 
@@ -24,7 +25,7 @@ public class StateManager : MonoBehaviour
                 return;
             }
 
-            _S = S;
+            _S = value;
         }
     }
 
@@ -95,6 +96,14 @@ public class StateManager : MonoBehaviour
                                         EVENT_GAMEWON;
 
 
+    public GameObject gameOverPanel;
+
+    public PlayableAsset introPlayable;
+    public TimelineAsset introTimeline;
+
+
+    
+
     private void Awake()
     {
         S = this;
@@ -104,5 +113,46 @@ public class StateManager : MonoBehaviour
 
 
 
+
+    static public void StartGame()
+    {
+        STATE = State.inGame;
+        Time.timeScale = 1;
+    }
+
+
+
+
+    static public void GameOver()
+    {
+        STATE = State.gameOver;
+        S.gameOverPanel.SetActive(true);
+
+        Time.timeScale = 0;
+    }
+
+
+
+
+
+    public void StartIntro()
+    {
+        STATE = State.intro;
+        PlayableDirector director = Camera.main.GetComponent<PlayableDirector>();
+
+        PlayableAsset playable = director.playableAsset;
+
+        director.playableAsset = null;
+        director.playableAsset = introTimeline;
+
+        director.Stop();
+        director.Play();
+    }
+
+
+    public void DebugButton()
+    {
+        Debug.Log("Button called this function");
+    }
    
 }
